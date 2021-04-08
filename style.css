@@ -3,40 +3,21 @@
     margin-left: auto;
     margin-right: auto;
     flex-wrap: wrap;
+    color: black;
+    background-color: black;
+    width: 600px;
+    height: 500px
+  }
+
+
+  .text {
+
+    color: white;
   }
   
-  
-  .grid {
-    width: 854px;
-    height: 591px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    flex-wrap: wrap;
-    border-style: solid;
-  }
-  
-  .grid div {
-    height: 20px;
-    width: 20px;
-  }
-  
-  .person {
-    background-color: yellow;
-  }
-  
-  
-  .mini-grid {
-    margin-left: 50px;
-    width: 80px;
-    height: 80px;
-    display: flex;
-    flex-wrap: wrap;
-    background-color: yellow;
-  }
-  
-  .mini-grid div {
-    height: 20px;
-    width: 20px;
+
+  .center {
+  margin: auto;
+  width: 50%;
   }
   
