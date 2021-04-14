@@ -3,8 +3,12 @@ import Shop from './shop.js';
 import Zombie from './zombie.js';
 import ShopItem from './shopItem.js';
 
+const zombies = [];
+
 
 window.addEventListener('DOMContentLoaded', (event) => {
+
+  //game objects
   let shopItemList = 
   [
     new ShopItem('lemon', 48, 12.00),
@@ -24,59 +28,74 @@ window.addEventListener('DOMContentLoaded', (event) => {
     new ShopItem('cups', 25, 4.50),
 ]
 
-
+  //Game Display Intialization
   const land = document.getElementById('land');
-
-
-
-
   const scoreDisplay = document.getElementById('money')
   const startBtn = document.getElementById('start-button')
 
   const gameWindow = document.getElementById('game-container')
-  console.log(gameWindow);
+  // console.log(gameWindow);
 
   gameWindow.setAttribute('color','black' )
   gameWindow.classList.add('.container');
 
+  // function animate() {
+  //   let zombieDiv = newZombie.appear()
+  //   console.log("animating", zombieDiv)
+  //   gameWindow.appendChild(zombieDiv)
+  // }
 
-  function clear_zombie(){
-    zombieDiv =  document.getElementById('zombie');
-    if(zombieDiv){
-      zombieDiv.innerHTML = "";
-    }
 
+  // let animationloop =
+  //   window.setInterval(animate, 225);
+  let game = new Game();
+  let shop = new Shop();
+
+
+  function add_zombie_display(div){
+    console.log(div);
+    gameWindow.appendChild(div)
   }
 
-  function add_zombie(){
-    let i = 1;
+
+  function createZombie(){
     let newZombie = new Zombie();
-    function animate() {
-      console.log("animating")
-      let zombieDiv = newZombie.appear()
-      gameWindow.appendChild(zombieDiv)
-      i++;
-      if(i === 12){
-        i = 1;
-      }
-    }
-    let animationloop =
-      window.setInterval(animate, 100);
+    game.addZombie(newZombie);
+    add_zombie_display(newZombie.zombieDiv);
+    return newZombie;
   }
 
+
+ 
 
   startBtn.addEventListener('click', (event)=>{
     event.preventDefault();
-    let game = new Game();
-    let shop = new Shop();
+
     shop.set_items(shopItemList);
-    //all game assets intialized
-    console.log(shop);
-  
+    console.log("shop loaded", shop);
     let shopUI = shop.getShopDisplay();
     gameWindow.appendChild(shopUI);
-    add_zombie();
 
+    createZombie();
+    createZombie();
+    window.setTimeout(createZombie, 500)
+    // createZombie();
+
+
+    function animate(){
+      return ()=>{
+        console.log(game.getZombies())
+        game.getZombies().forEach((zombie)=>{
+          zombie.appear();
+        })
+
+      }
+    }
+    window.setInterval(animate(), 225);
+    
+
+
+    
     // if(animationloop){
     //   clearInterval(animationloop);
     // }

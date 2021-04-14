@@ -13,7 +13,7 @@ export default class Shop{
         for (let item of this._shop){
             let displayButton = document.createElement('button');
             displayButton.setAttribute('id', `${item.type}:${item.amount}`)
-            displayButton.innerText = `${item.type}:${item.amount} for ${item.price}`;
+            displayButton.innerText = `${item.amount} ${item.type} \n $${item.price.toFixed(2)}`;
             this.UI.appendChild(displayButton);
         }
         return this.UI
@@ -21,9 +21,9 @@ export default class Shop{
     }
 
 
-    sell(){
+    // sell(){
 
-    }
+    // }
 
 
 }

@@ -2,7 +2,18 @@ export default class Game{
     constructor(gameState = 0, money = 100){
         this.gameState = gameState; 
         this.money = money;
+        this.zombies = [];
     }
+
+    addZombie(zombie){
+        this.zombies.push(zombie);
+    }
+
+    getZombies(){
+        return this.zombies;
+    }
+
+
 
     flipGameState(gameState){
         if (this.gameState){
