@@ -28,16 +28,78 @@ window.addEventListener('DOMContentLoaded', (event) => {
     new ShopItem('cups', 25, 4.50),
 ]
 
-  //Game Display Intialization
-  const land = document.getElementById('land');
-  const scoreDisplay = document.getElementById('money')
-  const startBtn = document.getElementById('start-button')
 
-  const gameWindow = document.getElementById('game-container')
+  
   // console.log(gameWindow);
 
-  gameWindow.setAttribute('color','black' )
-  gameWindow.classList.add('.container');
+  
+  function load_images(nameSet, maxImgNum){
+    for(let i = 1; i <= maxImgNum; i++){
+      const name = `${nameSet}_${i}`;
+      const src = `./img/${nameSet}/${name}.png`;
+      const element = document.createElement("img");
+      element.setAttribute('src', src);
+      element.classList.add('hidden');
+      console.log(element);
+      images[name] = element;
+    }
+
+  }
+  
+
+
+
+
+
+  function next_frame(img){
+    img = img.split("_")
+    let imgType, imgNum; 
+    [imgType, imgNum] = img;
+    imgNum = Number(imgNum);
+    imgNum++;
+    const next_image = `${imgType}_${imgNum}`
+    return next_image;
+  }
+
+
+  function draw(img, x= 10, y= 10){
+    ctx.drawImage(img, x, y);
+  }
+  
+  function clear(){
+    console.log()
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  function animate(zombie){
+    // zombieAnimation.forEach((animation)=>{
+    //   draw(images[animation]);
+    //   next_frame()
+    // })
+    clear();
+    for(let i = 0; i < zombies.length; i++){
+      console.log(images);
+      let current = zombies[i]
+      console.log(images[current].height);
+      draw(images[current]);
+      console.log(next_frame(current));
+      zombies[i] = next_frame(current);
+      console.log(current)
+    }
+    
+  }
+
+
+  //Game Display Intialization
+  const canvas = document.getElementById('game')
+  const ctx = canvas.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+
+  const images = {}
+  const zombies = ["appear_1"];
+  load_images("appear", 11);
+  console.log(images);
+  window.setInterval(animate, 125);
 
   // function animate() {
   //   let zombieDiv = newZombie.appear()
@@ -52,46 +114,46 @@ window.addEventListener('DOMContentLoaded', (event) => {
   let shop = new Shop();
 
 
-  function add_zombie_display(div){
-    console.log(div);
-    gameWindow.appendChild(div)
-  }
+  // function add_zombie_display(div){
+  //   console.log(div);
+  //   gameWindow.appendChild(div)
+  // }
 
 
-  function createZombie(){
-    let newZombie = new Zombie();
-    game.addZombie(newZombie);
-    add_zombie_display(newZombie.zombieDiv);
-    return newZombie;
-  }
+  // function createZombie(){
+  //   let newZombie = new Zombie();
+  //   game.addZombie(newZombie);
+  //   add_zombie_display(newZombie.zombieDiv);
+  //   return newZombie;
+  // }
 
 
  
 
-  startBtn.addEventListener('click', (event)=>{
-    event.preventDefault();
+  // startBtn.addEventListener('click', (event)=>{
+  //   event.preventDefault();
 
-    shop.set_items(shopItemList);
-    console.log("shop loaded", shop);
-    let shopUI = shop.getShopDisplay();
-    gameWindow.appendChild(shopUI);
+  //   shop.set_items(shopItemList);
+  //   console.log("shop loaded", shop);
+  //   let shopUI = shop.getShopDisplay();
+  //   gameWindow.appendChild(shopUI);
 
-    createZombie();
-    createZombie();
-    window.setTimeout(createZombie, 500)
-    // createZombie();
+  //   createZombie();
+  //   createZombie();
+  //   window.setTimeout(createZombie, 500)
+  //   // createZombie();
 
 
-    function animate(){
-      return ()=>{
-        console.log(game.getZombies())
-        game.getZombies().forEach((zombie)=>{
-          zombie.appear();
-        })
+  //   function animate(){
+  //     return ()=>{
+  //       console.log(game.getZombies())
+  //       game.getZombies().forEach((zombie)=>{
+  //         zombie.appear();
+  //       })
 
-      }
-    }
-    window.setInterval(animate(), 225);
+  //     }
+  //   }
+  //   window.setInterval(animate(), 225);
     
 
 
@@ -100,7 +162,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     //   clearInterval(animationloop);
     // }
 
-  })
+  //})
   
   
 

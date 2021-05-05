@@ -1,12 +1,11 @@
-.container {
+.game {
     display: block;
     margin-left: auto;
     margin-right: auto;
     flex-wrap: wrap;
     color: black;
     background-color: black;
-    width: 600px;
-    height: 500px
+    
   }
 
 
