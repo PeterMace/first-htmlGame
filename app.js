@@ -3,7 +3,7 @@ import Shop from './shop.js';
 import Zombie from './zombie.js';
 import ShopItem from './shopItem.js';
 
-const zombies = [];
+// const zombies = [];
 
 
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -37,9 +37,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
     for(let i = 1; i <= maxImgNum; i++){
       const name = `${nameSet}_${i}`;
       const src = `./img/${nameSet}/${name}.png`;
+     
       const element = document.createElement("img");
       element.setAttribute('src', src);
-      element.classList.add('hidden');
+      //element.classList.add('hidden');
       console.log(element);
       images[name] = element;
     }
@@ -51,18 +52,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
 
-  function next_frame(img){
-    img = img.split("_")
-    let imgType, imgNum; 
-    [imgType, imgNum] = img;
-    imgNum = Number(imgNum);
-    imgNum++;
-    const next_image = `${imgType}_${imgNum}`
-    return next_image;
-  }
+  
 
 
-  function draw(img, x= 10, y= 10){
+  function draw(img, x, y){
+    console.log(img);
     ctx.drawImage(img, x, y);
   }
   
@@ -71,22 +65,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
-  function animate(zombie){
-    // zombieAnimation.forEach((animation)=>{
-    //   draw(images[animation]);
-    //   next_frame()
-    // })
+  function animate(){
+    console.log(game.zombies)
     clear();
-    for(let i = 0; i < zombies.length; i++){
-      console.log(images);
-      let current = zombies[i]
-      console.log(images[current].height);
-      draw(images[current]);
-      console.log(next_frame(current));
-      zombies[i] = next_frame(current);
-      console.log(current)
+    for(let i = 0; i < game.zombies.length; i++){
+      let currentZombie = game.zombies[i]
+      let currentImg = currentZombie.img;
+      draw(images[currentImg], currentZombie.x , currentZombie.y);
+      currentZombie.img = currentZombie.next_frame(currentImg);
     }
-    
   }
 
 
@@ -95,89 +82,26 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const ctx = canvas.getContext('2d');
   ctx.imageSmoothingEnabled = false;
 
-  const images = {}
-  const zombies = ["appear_1"];
-  load_images("appear", 11);
-  console.log(images);
-  window.setInterval(animate, 125);
-
-  // function animate() {
-  //   let zombieDiv = newZombie.appear()
-  //   console.log("animating", zombieDiv)
-  //   gameWindow.appendChild(zombieDiv)
-  // }
-
-
-  // let animationloop =
-  //   window.setInterval(animate, 225);
+  //Game Objects
   let game = new Game();
   let shop = new Shop();
+  const images = {}
 
+  //Game Objects Initialization
+  load_images("appear", 11);
+  load_images("idle", 6);
+  load_images("walk", 10);
+  load_images("die", 8);
 
-  // function add_zombie_display(div){
-  //   console.log(div);
-  //   gameWindow.appendChild(div)
-  // }
-
-
-  // function createZombie(){
-  //   let newZombie = new Zombie();
-  //   game.addZombie(newZombie);
-  //   add_zombie_display(newZombie.zombieDiv);
-  //   return newZombie;
-  // }
-
-
- 
-
-  // startBtn.addEventListener('click', (event)=>{
-  //   event.preventDefault();
-
-  //   shop.set_items(shopItemList);
-  //   console.log("shop loaded", shop);
-  //   let shopUI = shop.getShopDisplay();
-  //   gameWindow.appendChild(shopUI);
-
-  //   createZombie();
-  //   createZombie();
-  //   window.setTimeout(createZombie, 500)
-  //   // createZombie();
-
-
-  //   function animate(){
-  //     return ()=>{
-  //       console.log(game.getZombies())
-  //       game.getZombies().forEach((zombie)=>{
-  //         zombie.appear();
-  //       })
-
-  //     }
-  //   }
-  //   window.setInterval(animate(), 225);
-    
-
-
-    
-    // if(animationloop){
-    //   clearInterval(animationloop);
-    // }
-
-  //})
-  
-  
+  game.zombies.push(Zombie.spawnZombie(game.zombies,10));
+  game.zombies.push(Zombie.spawnZombie(game.zombies,100));
+  game.zombies.push(Zombie.spawnZombie(game.zombies,200));
+  game.zombies.push(Zombie.spawnZombie(game.zombies,340));
+  game.zombies.push(Zombie.spawnZombie(game.zombies,260));
 
 
 
-
-
-
-
-
-
-
-
-
-
+  window.setInterval(animate, 175, game.zombies);
 
 
 

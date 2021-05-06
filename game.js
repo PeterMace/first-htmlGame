@@ -26,7 +26,7 @@ export default class Game{
     checkWin(){
         if(this.money > 10000){
             let message = document.createElement('h1')
-            message.innerHTML = 'You made a fortune off zombies, but what will you spend it on?'
+            message.innerHTML = 'You made a fortune off zombies, but the world has ended. What will you spend it on? '
         }
     }
 
