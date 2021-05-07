@@ -1,14 +1,11 @@
 import Game from './game.js';
 import Shop from './shop.js';
-import Zombie from './zombie.js';
+import Horde from './horde.js';
 import ShopItem from './shopItem.js';
-
-// const zombies = [];
-
 
 window.addEventListener('DOMContentLoaded', (event) => {
 
-  //game objects
+  //shop items
   let shopItemList = 
   [
     new ShopItem('lemon', 48, 12.00),
@@ -26,12 +23,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     new ShopItem('cups', 200, 19.25),
     new ShopItem('cups', 75, 9.75),
     new ShopItem('cups', 25, 4.50),
-]
-
-
-  
-  // console.log(gameWindow);
-
+  ]
   
   function load_images(nameSet, maxImgNum){
     for(let i = 1; i <= maxImgNum; i++){
@@ -40,42 +32,30 @@ window.addEventListener('DOMContentLoaded', (event) => {
      
       const element = document.createElement("img");
       element.setAttribute('src', src);
-      //element.classList.add('hidden');
-      console.log(element);
       images[name] = element;
     }
 
   }
-  
-
-
-
-
-
-  
-
 
   function draw(img, x, y){
-    console.log(img);
+    //console.log(img);
     ctx.drawImage(img, x, y);
   }
   
-  function clear(){
-    console.log()
+  function clearScreen(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
   function animate(){
-    console.log(game.zombies)
-    clear();
-    for(let i = 0; i < game.zombies.length; i++){
-      let currentZombie = game.zombies[i]
-      let currentImg = currentZombie.img;
-      draw(images[currentImg], currentZombie.x , currentZombie.y);
-      currentZombie.img = currentZombie.next_frame(currentImg);
+    // console.log(horde.getZombies())
+    clearScreen();
+    let horde_zombies = horde.getZombies();
+    for(let i = 0; i < horde_zombies.length; i++){
+      let currentZombie = horde_zombies[i]
+      draw(images[currentZombie.img], currentZombie.x , currentZombie.y);
+      currentZombie.next_frame();
     }
   }
-
 
   //Game Display Intialization
   const canvas = document.getElementById('game')
@@ -85,24 +65,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
   //Game Objects
   let game = new Game();
   let shop = new Shop();
+  let horde = new Horde();
   const images = {}
 
-  //Game Objects Initialization
+  //Game Images Loaded
   load_images("appear", 11);
   load_images("idle", 6);
   load_images("walk", 10);
   load_images("die", 8);
 
-  game.zombies.push(Zombie.spawnZombie(game.zombies,10));
-  game.zombies.push(Zombie.spawnZombie(game.zombies,100));
-  game.zombies.push(Zombie.spawnZombie(game.zombies,200));
-  game.zombies.push(Zombie.spawnZombie(game.zombies,340));
-  game.zombies.push(Zombie.spawnZombie(game.zombies,260));
+  horde.spawnZombie(10);
+  horde.spawnZombie(100);
+  horde.spawnZombie(200);
+  horde.spawnZombie(340);
+  horde.spawnZombie(260);
 
-
-
-  window.setInterval(animate, 175, game.zombies);
-
-
+  window.setInterval(animate, 125);
 
 })
