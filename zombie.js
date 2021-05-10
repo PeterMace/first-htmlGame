@@ -1,9 +1,10 @@
 export default class Zombie{
     constructor(x, y){
-        this.img = "walk_1";
-        this.i = 1;
+        this.imgType = "walk";
+        this.imgNum = 1;
         this.x = x;
         this.y = y;
+        this.phase = "arriving";
         this.maxFrame = {
             "appear" : 11,
             "die" : 8,
@@ -12,21 +13,34 @@ export default class Zombie{
         }
     }
 
-    next_frame( ){
-        let img = this.img.split("_")
-        let imgType, imgNum; 
-        [imgType, imgNum] = img;
-        imgNum = Number(imgNum);
-        imgNum === this.maxFrame[imgType] ? imgNum = 1: imgNum++;
-        const next_image = `${imgType}_${imgNum}`
-        console.log()
+    getFrame(){
+        return `${this.imgType}_${this.imgNum}`;
+    }
+
+    resetAnimation(){
+        this.imgNum = 1
+    }
+
+    nextFrame( ){
+        //reset animation frame if at max index. 
+        //Each animation has a different number of sprite images
+        this.imgNum === this.maxFrame[this.imgType] ? this.imgNum = 1 : this.imgNum++;
+        const next_image = `${this.imgType}_${this.imgNum}`
         this.img = next_image;
     }
 
-    setAnimation(animation){
-        this.animation = animation
+    setIdle(){
+        this.imgType = "idle";
+        this.imgNum = 1;
     }
 
+    setWalk(){
+        this.imgType = "walk";
+        this.imgNum = 1;
+    }
+    
+
+    
     
 
 }

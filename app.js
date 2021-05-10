@@ -38,7 +38,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   }
 
   function draw(img, x, y){
-    //console.log(img);
+    // console.log(img);
     ctx.drawImage(img, x, y);
   }
   
@@ -52,9 +52,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let horde_zombies = horde.getZombies();
     for(let i = 0; i < horde_zombies.length; i++){
       let currentZombie = horde_zombies[i]
-      draw(images[currentZombie.img], currentZombie.x , currentZombie.y);
-      currentZombie.next_frame();
+      draw(images[currentZombie.getFrame()], currentZombie.x , currentZombie.y);
+      currentZombie.nextFrame();
     }
+    horde.moveZombies();
   }
 
   //Game Display Intialization
@@ -73,12 +74,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
   load_images("idle", 6);
   load_images("walk", 10);
   load_images("die", 8);
+  load_images("drink", 7);
 
   horde.spawnZombie(10);
   horde.spawnZombie(100);
   horde.spawnZombie(200);
-  horde.spawnZombie(340);
   horde.spawnZombie(260);
+  horde.spawnZombie(340);
 
   window.setInterval(animate, 125);
 
