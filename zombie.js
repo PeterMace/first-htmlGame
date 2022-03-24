@@ -9,7 +9,8 @@ export default class Zombie{
             "appear" : 11,
             "die" : 8,
             "idle" : 6,
-            "walk" : 10
+            "walk" : 10,
+            "drink" : 7
         }
     }
 
@@ -38,9 +39,15 @@ export default class Zombie{
         this.imgType = "walk";
         this.imgNum = 1;
     }
-    
 
-    
-    
+    setDrink(){
+        this.imgType = "drink";
+        this.imgNum = 1;
+    }
+
+    setDie(){
+        this.imgType = "die";
+        this.imgNum = 1;
+    }
 
 }

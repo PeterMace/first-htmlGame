@@ -13,14 +13,12 @@ export default class Horde{
             const previous = this.zombies[i-1]
             if(previous){
                 //console.log(currentZombie.x, previous.x, "result", (currentZombie.x - previous.x > 50))
-                if((previous.x - currentZombie.x > 50) && currentZombie.x < 550){
+                if(((previous.x - currentZombie.x) > 50) && currentZombie.x < 550){
                     currentZombie.x += 5;
                 }else{
                     if (currentZombie.imgType === "walk"){
                         currentZombie.setIdle();
-
                     }
-                     
                 }
             }else{
                 if(currentZombie.x < 550){
