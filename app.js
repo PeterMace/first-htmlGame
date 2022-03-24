@@ -56,10 +56,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
       currentZombie.nextFrame();
     }
     horde.moveZombies();
-    let spawnSeed = Math.floor(Math.random() * 10000);
-    if(spawnSeed >= horde.spawnRate && horde.spawnDelay === 0){
-      horde.spawnZombie();
-      horde.spawnDelay = 25;
+    if(horde.spawnDelay === 0){
+      let spawnSeed = Math.floor(Math.random() * 100);
+      if(spawnSeed <= horde.spawnRate){
+        horde.spawnZombie();
+        horde.spawnDelay = 10;
+      }
     }
     horde.spawnDelay ? horde.spawnDelay-=1 : horde.spawnDelay;
   }

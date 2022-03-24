@@ -2,7 +2,7 @@ import Zombie from './zombie.js';
 export default class Horde{
     constructor (){
         this.zombies = [];
-        this.spawnRate = 10;
+        this.spawnRate = 3;
         this.spawnDelay = 0;
     }
 
@@ -20,7 +20,7 @@ export default class Horde{
             else{
                 const previous = this.zombies[i-1]
                 if(previous){
-                    //console.log(currentZombie.x, previous.x, "result", (currentZombie.x - previous.x > 50))
+                    //If previous zombie is not blocking forward movement, and has not arrived at the stand(550).
                     if(((previous.x - currentZombie.x) > 50) && currentZombie.x < 550){
                         currentZombie.x += 5;
                     }else{
@@ -30,6 +30,9 @@ export default class Horde{
                     }
                 }else{
                     if(currentZombie.x < 550){
+                        if (currentZombie.imgType === "idle"){
+                            currentZombie.setWalk();
+                        }
                         currentZombie.x += 5;
                     }else{
                         if (currentZombie.imgType === "walk"){
