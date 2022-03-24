@@ -1,10 +1,9 @@
 export default class Zombie{
     constructor(x, y){
-        this.imgType = "walk";
+        this.imgType = "appear";
         this.imgNum = 1;
         this.x = x;
         this.y = y;
-        this.phase = "arriving";
         this.maxFrame = {
             "appear" : 11,
             "die" : 8,
@@ -28,6 +27,13 @@ export default class Zombie{
         this.imgNum === this.maxFrame[this.imgType] ? this.imgNum = 1 : this.imgNum++;
         const next_image = `${this.imgType}_${this.imgNum}`
         this.img = next_image;
+    }
+
+    isEndFrame(){
+        if(this.imgNum === this.maxFrame[this.imgType]){
+            return true;
+        }
+        return false;
     }
 
     setIdle(){

@@ -56,6 +56,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
       currentZombie.nextFrame();
     }
     horde.moveZombies();
+    let spawnSeed = Math.floor(Math.random() * 10000);
+    if(spawnSeed >= horde.spawnRate && horde.spawnDelay === 0){
+      horde.spawnZombie();
+      horde.spawnDelay = 25;
+    }
+    horde.spawnDelay ? horde.spawnDelay-=1 : horde.spawnDelay;
   }
 
   //Game Display Intialization
@@ -76,11 +82,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
   load_images("die", 8);
   load_images("drink", 7);
 
-  horde.spawnZombie(10);
-  horde.spawnZombie(100);
-  horde.spawnZombie(200);
-  horde.spawnZombie(260);
-  horde.spawnZombie(340);
+  // horde.spawnZombie(10);
+  // horde.spawnZombie(100);
+  // horde.spawnZombie(200);
+  // horde.spawnZombie(260);
+  // horde.spawnZombie(340);
 
   window.setInterval(animate, 125);
 
