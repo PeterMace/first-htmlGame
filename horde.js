@@ -12,6 +12,7 @@ export default class Horde{
     
     moveZombies(){
         this.zombies.forEach((currentZombie, i)=>{
+            //Spawn animation transition
             if (currentZombie.imgType === "appear"){
                 if(currentZombie.isEndFrame()){
                     currentZombie.setWalk(); 
@@ -19,17 +20,22 @@ export default class Horde{
             }
             else{
                 const previous = this.zombies[i-1]
+                //Queue management
                 if(previous){
-                    //If previous zombie is not blocking forward movement, and has not arrived at the stand(550).
                     if(((previous.x - currentZombie.x) > 50) && currentZombie.x < 550){
                         currentZombie.x += 5;
+                        if (currentZombie.imgType === "idle"){
+                            currentZombie.setWalk();
+                        }
                     }else{
                         if (currentZombie.imgType === "walk"){
                             currentZombie.setIdle();
                         }
                     }
-                }else{
-                    if(currentZombie.x < 550){
+                }
+                //First zombie animation management
+                else{
+                    if(currentZombie.x < 550  && (currentZombie.imgType !== "die")){
                         if (currentZombie.imgType === "idle"){
                             currentZombie.setWalk();
                         }
@@ -40,11 +46,14 @@ export default class Horde{
                         }
                         if (currentZombie.imgType === "drink"){
                             if(currentZombie.isEndFrame()){
+                                //distance offset to smooth animation transition
+                                currentZombie.x -= 45;
                                 currentZombie.setDie(); 
                             }
                         }
                         if (currentZombie.imgType === "die"){
                             if(currentZombie.isEndFrame()){
+                                currentZombie.x += 45;
                                 this.zombies.splice(i, 1);
                             }
                         }

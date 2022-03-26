@@ -20,9 +20,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     new ShopItem('sugar', 15, 5.25),
     new ShopItem('sugar', 5, 2.00),
 
-    new ShopItem('cups', 200, 19.25),
-    new ShopItem('cups', 75, 9.75),
-    new ShopItem('cups', 25, 4.50),
+    new ShopItem('cups', 200, 4.50),
+    new ShopItem('cups', 75, 2.75),
   ]
   
   function load_images(nameSet, maxImgNum){
@@ -38,7 +37,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
   }
 
   function draw(img, x, y){
-    // console.log(img);
     ctx.drawImage(img, x, y);
   }
   
@@ -47,7 +45,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
   }
 
   function animate(){
-    // console.log(horde.getZombies())
     clearScreen();
     let horde_zombies = horde.getZombies();
     for(let i = 0; i < horde_zombies.length; i++){
@@ -67,7 +64,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   }
 
   //Game Display Intialization
-  const canvas = document.getElementById('game')
+  const canvas = document.getElementById('game');
   const ctx = canvas.getContext('2d');
   ctx.imageSmoothingEnabled = false;
 
@@ -84,12 +81,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
   load_images("die", 8);
   load_images("drink", 7);
 
-  // horde.spawnZombie(10);
-  // horde.spawnZombie(100);
-  // horde.spawnZombie(200);
-  // horde.spawnZombie(260);
-  // horde.spawnZombie(340);
-
   window.setInterval(animate, 125);
+  // while(game.phase === 1){
+  //   while(game.phase === 2){
+  //     window.setInterval(animate, 125);
+  //   }
+  //   while(game.phase === 3){
+  //     window.setInterval(animate, 125);
+  //   }
+  // }
 
+  
 })

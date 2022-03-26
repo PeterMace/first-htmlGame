@@ -17,7 +17,6 @@ export default class Shop{
             this.UI.appendChild(displayButton);
         }
         return this.UI
-        
     }
 
 
