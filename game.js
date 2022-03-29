@@ -4,6 +4,7 @@ export default class Game{
         this.gameState = 1;
         this.phase = 1; 
         this.money = 25.00;
+        this.roundTimer = 500;
     }
 
     flipGameState(gameState){
@@ -37,6 +38,10 @@ export default class Game{
             return true;
         }
         return false;
+    }
+    
+    resetRoundTimer(){
+        this.roundTimer = 500;
     }
     
 }

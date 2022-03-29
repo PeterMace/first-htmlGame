@@ -60,7 +60,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
         horde.spawnDelay = 10;
       }
     }
+    //Spawn delay control
     horde.spawnDelay ? horde.spawnDelay-=1 : horde.spawnDelay;
+    //Zombie round duration
+    game.roundTimer-=1;
+    if(game.roundTimer < 0){
+      clearAnimation();
+    }
+    console.log("test", game.roundTimer)
   }
 
   //Game Display Intialization
@@ -81,15 +88,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
   load_images("die", 8);
   load_images("drink", 7);
 
-  window.setInterval(animate, 125);
-  // while(game.phase === 1){
-  //   while(game.phase === 2){
-  //     window.setInterval(animate, 125);
-  //   }
-  //   while(game.phase === 3){
-  //     window.setInterval(animate, 125);
-  //   }
-  // }
+  
+  let animation = window.setInterval(animate, 125);
+
+  function clearAnimation(){
+    clearInterval(animation);
+    clearScreen();
+  }
 
   
 })
