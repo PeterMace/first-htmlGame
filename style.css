@@ -19,52 +19,14 @@
   margin: auto;
   width: 50%;
   }
+
+
+  .shop_button{
+    background-color: white;
+    width: 100px;
+    height: 80px;
+  }
   
   .zombie{
     width:60px;
-  }
-
-  .zombie.appear_1 {
-    background-image: url("./img/appear/appear_1.png");
-    height: 79px;
-  }
-  .zombie.appear_2 {
-    background-image: url("./img/appear/appear_2.png");
-    height: 79px;
-  }
-  .zombie.appear_3 {
-    background-image: url("./img/appear/appear_3.png");
-    height: 79px;
-  }
-  .zombie.appear_4 {
-    background-image: url("./img/appear/appear_4.png");
-    height: 79px;
-  }
-  .zombie.appear_5 {
-    background-image: url("./img/appear/appear_5.png");
-    height: 79px;
-  }
-  .zombie.appear_6 {
-    background-image: url("./img/appear/appear_6.png");
-    height: 79px;
-  }
-  .zombie.appear_7 {
-    background-image: url("./img/appear/appear_7.png");
-    height: 79px;
-  }
-  .zombie.appear_8 {
-    background-image: url("./img/appear/appear_8.png");
-    height: 79px;
-  }
-  .zombie.appear_9 {
-    background-image: url("./img/appear/appear_9.png");
-    height: 79px;
-  }
-  .zombie.appear_10 {
-    background-image: url("./img/appear/appear_10.png");
-    height: 79px;
-  }
-  .zombie.appear_11 {
-    background-image: url"(./img/appear/appear_11.png)";
-    height: 79px;
   }
